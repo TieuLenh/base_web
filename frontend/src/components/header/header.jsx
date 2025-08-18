@@ -20,7 +20,7 @@ const Header = ({className='header', ...props}) => {
             className={className}
             {...props}
         >
-            {data||'loading...'}
+            {(data||[]).map(val => `${val.name}: ${val.age}`)}
         </div>
     )
 }
