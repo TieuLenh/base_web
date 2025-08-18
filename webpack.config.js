@@ -1,10 +1,12 @@
 const path = require("path");
+const mcep = require("mini-css-extract-plugin");
 
 module.exports = {
   entry: "./frontend/src/index.js", // file đầu vào
   output: {
-    path: path.resolve(__dirname, "frontend/public"), // folder chứa bundle
+    path: path.resolve(__dirname, "frontend/public/dist"), // folder chứa bundle
     filename: "bundle.js", // tên file bundle
+    clean: true, // xóa toàn bộ file static(tĩnh) trong folder lấy path
   },
   module: {
     rules: [
@@ -12,13 +14,26 @@ module.exports = {
         test: /\.(js|jsx)$/,      // các file .js hoặc .jsx
         exclude: /node_modules/,  // loại trừ node_modules
         use: {
-          loader: "babel-loader"
+          loader: "babel-loader",
         }
-      }
+      },
+      {
+        test: /\.s[ac]ss$/i,  // .sass hoặc .scss
+        use: [
+          mcep.loader, // chèn CSS vào DOM
+          "css-loader",   // đọc CSS
+          "sass-loader"   // biên dịch SCSS/Sass sang CSS
+        ],
+      },
     ]
   },
   resolve: {
-    extensions: [".js", ".jsx"] // import file không cần ghi đuôi
+    extensions: [".js", ".jsx",".sass", ".scss"] // import file không cần ghi đuôi
   },
-  mode: "development"
+  mode: "development",
+  plugins: [
+    new mcep({
+      filename: "styles.css", // file CSS output
+    }),
+  ],
 };

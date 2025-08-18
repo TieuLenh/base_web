@@ -1,21 +1,13 @@
-import React, {useEffect} from "react";
+import React from "react";
 import Header from "./components/header/header.jsx";
-const App = () => {
-    useEffect(
-        () => {
-            fetch('/api')
-                .then(res => res.json())
-                .then(result => {
+import './style.scss';
 
-                })
-                .catch(err => console.log(err));
-        },[]
-    )
+const App = () => {
     return (
-        <div>
+        <>
             <Header title="header container" />
             test
-        </div>
+        </>
     )
 }
 
