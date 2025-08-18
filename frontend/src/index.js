@@ -1,23 +1,6 @@
-import React,{ useEffect} from 'react';
+import React from 'react';
 import {createRoot} from 'react-dom/client';
-
-const App = () => {
-    useEffect(
-        () => {
-            fetch('/api')
-                .then(res => res.json())
-                .then(result => {
-
-                })
-                .catch(err => console.log(err));
-        },[]
-    )
-    return (
-        <div>
-            test
-        </div>
-    )
-}
+import App from './App.jsx';
 
 const root = createRoot(document.getElementById('root'));
 root.render(<App />)
