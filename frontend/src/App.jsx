@@ -1,5 +1,5 @@
 import React, {useEffect} from "react";
-import Header from "./components/header/header/header";
+import Header from "./components/header/header.jsx";
 const App = () => {
     useEffect(
         () => {
