@@ -1,23 +1,26 @@
-import React, {useEffect} from "react";
+import React, {useState, useEffect} from "react";
 import './header.scss'
 
 const Header = ({className='header', ...props}) => {
+    const [data, setData] = useState(null);
     useEffect(
         () => {
-            fetch('/api')
-                .then(res => res.json())
-                .then(result => {
-
-                })
-                .catch(err => console.log(err));
+            async function getData(url) {
+                // Example fetch usage
+                const response = await fetch(url);
+                const result = await response.json();
+                setData(result);
+            }
+            getData('/api');
         },[]
     )
+    console.log(data);
     return(
         <div
             className={className}
             {...props}
         >
-            
+            {data||'loading...'}
         </div>
     )
 }
