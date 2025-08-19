@@ -31,6 +31,19 @@ module.exports = {
     extensions: [".js", ".jsx",".sass", ".scss"] // import file không cần ghi đuôi
   },
   mode: "development",
+  devServer: {
+    static: {
+      directory: path.join(__dirname, './frontend/public/dist'),
+    },
+    port: 3000, // FE chạy cổng này
+    proxy: {
+      '/api': {
+        target: 'http://localhost:5000', // BE chạy ở đây
+        pathRewrite: { '^/api': '' },    // bỏ prefix /api nếu BE không có
+        changeOrigin: true,
+      },
+    },
+  },
   plugins: [
     new mcep({
       filename: "styles.css", // file CSS output
